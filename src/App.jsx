@@ -24,22 +24,17 @@ class IssueFilter extends React.Component {
 }
 
 
-class IssueRow extends React.Component{
-    render(){
-        const issue = this.props.issue;
-        return(
-            <tr>
-                <td>{issue.id}</td>
-                <td>{issue.status}</td>
-                <td>{issue.owner}</td>
-                <td>{issue.created.toDateString()}</td>
-                <td>{issue.effort}</td>
-                <td>{issue.completionDate ? issue.completionDate.toDateString() : ' -- no date -- '}</td>
-                <td>{issue.title}</td>
-            </tr>
-        )
-    }
-}
+const IssueRow = (props) => (
+    <tr>
+        <td>{props.issue.id}</td>
+        <td>{props.issue.status}</td>
+        <td>{props.issue.owner}</td>
+        <td>{props.issue.created.toDateString()}</td>
+        <td>{props.issue.effort}</td>
+        <td>{props.issue.completionDate ? props.issue.completionDate.toDateString() : ' -- no date -- '}</td>
+        <td>{props.issue.title}</td>
+    </tr>
+);
 
 IssueRow.propTypes = {
     issue_id: React.PropTypes.number.isRequired,
@@ -50,29 +45,24 @@ IssueRow.defaultProps = {
     // issue_title: ' -- untitled -- '
 }
 
-class IssueTable extends React.Component{
-    render(){
-        const borderedStyle = {border:"1px solid silver", padding: 6 };
-        const issueRows =  this.props.issues.map(issue => <IssueRow issue_id={issue.id} key={issue.id} issue={issue} />);
-        return(
-            <table>
-                <thead>
-                    <tr>
-                        <th style={borderedStyle}>Id</th>
-                        <th style={borderedStyle}>Status</th>
-                        <th style={borderedStyle}>Owner</th>
-                        <th style={borderedStyle}>Created</th>
-                        <th style={borderedStyle}>Effort</th>
-                        <th style={borderedStyle}>Completion</th>
-                        <th style={borderedStyle}>Title</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    { issueRows }
-                </tbody>
-            </table>
-        )
-    }
+function IssueTable () {
+    const issueRows =  this.props.issues.map(issue => <IssueRow issue_id={issue.id} key={issue.id} issue={issue} />);
+    return(
+        <table className="bordered-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Status</th>
+                    <th>Owner</th>
+                    <th>Created</th>
+                    <th>Effort</th>
+                    <th>Completion</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody> { issueRows } </tbody>
+        </table>
+    )
 }
 
 class IssueAdd extends React.Component{
