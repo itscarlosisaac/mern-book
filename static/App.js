@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -9,6 +9,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var contentNode = document.getElementById('contents');
+var issues = [{
+    id: 1, status: 'Open', owner: 'Ryan', created: new Date('2018-01-23'), effort: 7, completionDate: undefined, title: 'Error in the console when clicking Add.'
+}, {
+    id: 2, status: 'Assigned', owner: 'Ravan', created: new Date('2018-01-27'), effort: 13, completionDate: new Date('2018-02-15'), title: 'Missing bottom border on panel.'
+}, {
+    id: 3, status: 'In Progress', owner: 'Michael', created: new Date('2018-01-29'), effort: 5, completionDate: new Date('2018-02-01'), title: 'Build table.'
+}];
 
 var IssueFilter = function (_React$Component) {
     _inherits(IssueFilter, _React$Component);
@@ -20,12 +27,12 @@ var IssueFilter = function (_React$Component) {
     }
 
     _createClass(IssueFilter, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
-                "This is a placeholder for de filter"
+                'This is a placeholder for de filter'
             );
         }
     }]);
@@ -43,19 +50,19 @@ var IssueRow = function (_React$Component2) {
     }
 
     _createClass(IssueRow, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             var borderedStyle = { border: "1px solid silver", padding: 4 };
             return React.createElement(
-                "tr",
+                'tr',
                 null,
                 React.createElement(
-                    "td",
+                    'td',
                     { style: borderedStyle },
                     this.props.issue_id
                 ),
                 React.createElement(
-                    "td",
+                    'td',
                     { style: borderedStyle },
                     this.props.children
                 )
@@ -85,42 +92,42 @@ var IssueTable = function (_React$Component3) {
     }
 
     _createClass(IssueTable, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             var borderedStyle = { border: "1px solid silver", padding: 6 };
             return React.createElement(
-                "table",
+                'table',
                 null,
                 React.createElement(
-                    "thead",
+                    'thead',
                     null,
                     React.createElement(
-                        "tr",
+                        'tr',
                         null,
                         React.createElement(
-                            "th",
+                            'th',
                             { style: borderedStyle },
-                            "Id"
+                            'Id'
                         ),
                         React.createElement(
-                            "th",
+                            'th',
                             { style: borderedStyle },
-                            "Title"
+                            'Title'
                         )
                     )
                 ),
                 React.createElement(
-                    "tbody",
+                    'tbody',
                     null,
                     React.createElement(
                         IssueRow,
                         { issue_id: 1 },
-                        " Error on console when clicking Add "
+                        ' Error on console when clicking Add '
                     ),
                     React.createElement(
                         IssueRow,
                         { issue_id: 2 },
-                        " Missing bottom border on panel "
+                        ' Missing bottom border on panel '
                     )
                 )
             );
@@ -140,12 +147,12 @@ var IssueAdd = function (_React$Component4) {
     }
 
     _createClass(IssueAdd, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
-                "This is the form to add the Issue"
+                'This is the form to add the Issue'
             );
         }
     }]);
@@ -163,20 +170,20 @@ var IssueList = function (_React$Component5) {
     }
 
     _createClass(IssueList, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
                 React.createElement(
-                    "h1",
+                    'h1',
                     null,
-                    "Issue Tracker"
+                    'Issue Tracker'
                 ),
                 React.createElement(IssueFilter, null),
-                React.createElement("hr", null),
+                React.createElement('hr', null),
                 React.createElement(IssueTable, null),
-                React.createElement("hr", null),
+                React.createElement('hr', null),
                 React.createElement(IssueAdd, null)
             );
         }
@@ -187,10 +194,10 @@ var IssueList = function (_React$Component5) {
 
 var continents = ['Africa', 'America', 'Asia', 'Australia', 'Europe'];
 var message = continents.map(function (c) {
-    return "Hello " + c + "!";
+    return 'Hello ' + c + '!';
 }).join(' - ');
 var component = React.createElement(
-    "p",
+    'p',
     null,
     message
 );
