@@ -1,0 +1,10 @@
+{
+  "name": "Mern",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Carlos Isaac Martinez Batista <itscarlosisaac@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
