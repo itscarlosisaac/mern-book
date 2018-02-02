@@ -4,7 +4,15 @@
   "main": "index.js",
   "author": "Carlos Isaac Martinez Batista <itscarlosisaac@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "compile": "babel src --presets react --out-dir static",
+    "watch": "babel src --presets react --out-dir static --watch"
+  },
   "dependencies": {
     "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react": "^6.24.1"
   }
 }
