@@ -1,5 +1,6 @@
 
 const contentNode = document.getElementById('contents');
+
 const issues = [
     {
         id: 1, status: 'Open' , owner: 'Ryan', created: new Date('2018-01-23'), effort: 7, completionDate: undefined, title: 'Error in the console when clicking Add.'
@@ -25,11 +26,16 @@ class IssueFilter extends React.Component {
 
 class IssueRow extends React.Component{
     render(){
-        const borderedStyle = {border:"1px solid silver", padding: 4 };
+        const issue = this.props.issue;
         return(
             <tr>
-                <td style={borderedStyle}>{this.props.issue_id}</td>
-                <td style={borderedStyle}>{this.props.children}</td>
+                <td>{issue.id}</td>
+                <td>{issue.status}</td>
+                <td>{issue.owner}</td>
+                <td>{issue.created.toDateString()}</td>
+                <td>{issue.effort}</td>
+                <td>{issue.completionDate ? issue.completionDate.toDateString() : ' -- no date -- '}</td>
+                <td>{issue.title}</td>
             </tr>
         )
     }
@@ -47,17 +53,22 @@ IssueRow.defaultProps = {
 class IssueTable extends React.Component{
     render(){
         const borderedStyle = {border:"1px solid silver", padding: 6 };
+        const issueRows =  this.props.issues.map(issue => <IssueRow issue_id={issue.id} key={issue.id} issue={issue} />);
         return(
             <table>
                 <thead>
                     <tr>
                         <th style={borderedStyle}>Id</th>
+                        <th style={borderedStyle}>Status</th>
+                        <th style={borderedStyle}>Owner</th>
+                        <th style={borderedStyle}>Created</th>
+                        <th style={borderedStyle}>Effort</th>
+                        <th style={borderedStyle}>Completion</th>
                         <th style={borderedStyle}>Title</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <IssueRow issue_id={1}> Error on console when clicking Add </IssueRow>
-                    <IssueRow issue_id={2}> Missing bottom border on panel </IssueRow>
+                    { issueRows }
                 </tbody>
             </table>
         )
@@ -82,7 +93,7 @@ class IssueList extends React.Component {
                 <h1>Issue Tracker</h1>
                 <IssueFilter />
                 <hr />
-                <IssueTable />
+                <IssueTable issues={issues} />
                 <hr />
                 <IssueAdd />
             </div>

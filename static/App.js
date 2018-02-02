@@ -9,6 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var contentNode = document.getElementById('contents');
+
 var issues = [{
     id: 1, status: 'Open', owner: 'Ryan', created: new Date('2018-01-23'), effort: 7, completionDate: undefined, title: 'Error in the console when clicking Add.'
 }, {
@@ -52,19 +53,44 @@ var IssueRow = function (_React$Component2) {
     _createClass(IssueRow, [{
         key: 'render',
         value: function render() {
-            var borderedStyle = { border: "1px solid silver", padding: 4 };
+            var issue = this.props.issue;
             return React.createElement(
                 'tr',
                 null,
                 React.createElement(
                     'td',
-                    { style: borderedStyle },
-                    this.props.issue_id
+                    null,
+                    issue.id
                 ),
                 React.createElement(
                     'td',
-                    { style: borderedStyle },
-                    this.props.children
+                    null,
+                    issue.status
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.owner
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.created.toDateString()
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.effort
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.completionDate ? issue.completionDate.toDateString() : ' -- no date -- '
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    issue.title
                 )
             );
         }
@@ -95,6 +121,9 @@ var IssueTable = function (_React$Component3) {
         key: 'render',
         value: function render() {
             var borderedStyle = { border: "1px solid silver", padding: 6 };
+            var issueRows = this.props.issues.map(function (issue) {
+                return React.createElement(IssueRow, { issue_id: issue.id, key: issue.id, issue: issue });
+            });
             return React.createElement(
                 'table',
                 null,
@@ -112,6 +141,31 @@ var IssueTable = function (_React$Component3) {
                         React.createElement(
                             'th',
                             { style: borderedStyle },
+                            'Status'
+                        ),
+                        React.createElement(
+                            'th',
+                            { style: borderedStyle },
+                            'Owner'
+                        ),
+                        React.createElement(
+                            'th',
+                            { style: borderedStyle },
+                            'Created'
+                        ),
+                        React.createElement(
+                            'th',
+                            { style: borderedStyle },
+                            'Effort'
+                        ),
+                        React.createElement(
+                            'th',
+                            { style: borderedStyle },
+                            'Completion'
+                        ),
+                        React.createElement(
+                            'th',
+                            { style: borderedStyle },
                             'Title'
                         )
                     )
@@ -119,16 +173,7 @@ var IssueTable = function (_React$Component3) {
                 React.createElement(
                     'tbody',
                     null,
-                    React.createElement(
-                        IssueRow,
-                        { issue_id: 1 },
-                        ' Error on console when clicking Add '
-                    ),
-                    React.createElement(
-                        IssueRow,
-                        { issue_id: 2 },
-                        ' Missing bottom border on panel '
-                    )
+                    issueRows
                 )
             );
         }
@@ -182,7 +227,7 @@ var IssueList = function (_React$Component5) {
                 ),
                 React.createElement(IssueFilter, null),
                 React.createElement('hr', null),
-                React.createElement(IssueTable, null),
+                React.createElement(IssueTable, { issues: issues }),
                 React.createElement('hr', null),
                 React.createElement(IssueAdd, null)
             );
