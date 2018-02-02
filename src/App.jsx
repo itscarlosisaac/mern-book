@@ -12,12 +12,44 @@ class IssueFilter extends React.Component {
     }
 }
 
+
+class IssueRow extends React.Component{
+    render(){
+        const borderedStyle = {border:"1px solid silver", padding: 4 };
+        return(
+            <tr>
+                <td style={borderedStyle}>{this.props.issue_id}</td>
+                <td style={borderedStyle}>{this.props.issue_title}</td>
+            </tr>
+        )
+    }
+}
+
+IssueRow.propTypes = {
+    issue_id: React.PropTypes.number.isRequired,
+    issue_title: React.PropTypes.string
+}
+
+IssueRow.defaultProps = {
+    issue_title: ' -- untitled -- '
+}
+
 class IssueTable extends React.Component{
     render(){
+        const borderedStyle = {border:"1px solid silver", padding: 6 };
         return(
-            <div>
-                This is a placeholder fr the react table.
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style={borderedStyle}>Id</th>
+                        <th style={borderedStyle}>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <IssueRow issue_id={1} />
+                    <IssueRow issue_id={2} issue_title="Missing bottom border on panel" />
+                </tbody>
+            </table>
         )
     }
 }
@@ -31,6 +63,7 @@ class IssueAdd extends React.Component{
         )
     }
 }
+
 
 class IssueList extends React.Component {
     render(){

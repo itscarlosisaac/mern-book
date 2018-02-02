@@ -33,8 +33,50 @@ var IssueFilter = function (_React$Component) {
     return IssueFilter;
 }(React.Component);
 
-var IssueTable = function (_React$Component2) {
-    _inherits(IssueTable, _React$Component2);
+var IssueRow = function (_React$Component2) {
+    _inherits(IssueRow, _React$Component2);
+
+    function IssueRow() {
+        _classCallCheck(this, IssueRow);
+
+        return _possibleConstructorReturn(this, (IssueRow.__proto__ || Object.getPrototypeOf(IssueRow)).apply(this, arguments));
+    }
+
+    _createClass(IssueRow, [{
+        key: 'render',
+        value: function render() {
+            var borderedStyle = { border: "1px solid silver", padding: 4 };
+            return React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                    'td',
+                    { style: borderedStyle },
+                    this.props.issue_id
+                ),
+                React.createElement(
+                    'td',
+                    { style: borderedStyle },
+                    this.props.issue_title
+                )
+            );
+        }
+    }]);
+
+    return IssueRow;
+}(React.Component);
+
+IssueRow.propTypes = {
+    issue_id: React.PropTypes.number.isRequired,
+    issue_title: React.PropTypes.string
+};
+
+IssueRow.defaultProps = {
+    issue_title: ' -- untitled -- '
+};
+
+var IssueTable = function (_React$Component3) {
+    _inherits(IssueTable, _React$Component3);
 
     function IssueTable() {
         _classCallCheck(this, IssueTable);
@@ -45,10 +87,34 @@ var IssueTable = function (_React$Component2) {
     _createClass(IssueTable, [{
         key: 'render',
         value: function render() {
+            var borderedStyle = { border: "1px solid silver", padding: 6 };
             return React.createElement(
-                'div',
+                'table',
                 null,
-                'This is a placeholder fr the react table.'
+                React.createElement(
+                    'thead',
+                    null,
+                    React.createElement(
+                        'tr',
+                        null,
+                        React.createElement(
+                            'th',
+                            { style: borderedStyle },
+                            'Id'
+                        ),
+                        React.createElement(
+                            'th',
+                            { style: borderedStyle },
+                            'Title'
+                        )
+                    )
+                ),
+                React.createElement(
+                    'tbody',
+                    null,
+                    React.createElement(IssueRow, { issue_id: 1 }),
+                    React.createElement(IssueRow, { issue_id: 2, issue_title: 'Missing bottom border on panel' })
+                )
             );
         }
     }]);
@@ -56,8 +122,8 @@ var IssueTable = function (_React$Component2) {
     return IssueTable;
 }(React.Component);
 
-var IssueAdd = function (_React$Component3) {
-    _inherits(IssueAdd, _React$Component3);
+var IssueAdd = function (_React$Component4) {
+    _inherits(IssueAdd, _React$Component4);
 
     function IssueAdd() {
         _classCallCheck(this, IssueAdd);
@@ -79,8 +145,8 @@ var IssueAdd = function (_React$Component3) {
     return IssueAdd;
 }(React.Component);
 
-var IssueList = function (_React$Component4) {
-    _inherits(IssueList, _React$Component4);
+var IssueList = function (_React$Component5) {
+    _inherits(IssueList, _React$Component5);
 
     function IssueList() {
         _classCallCheck(this, IssueList);
