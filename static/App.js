@@ -217,12 +217,18 @@ var IssueList = function (_React$Component3) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newIssue) }).then(function (response) {
-                return response.json();
-            }).then(function (updatedIssues) {
-                updatedIssues.created = new Date(updatedIssues.created);
-                updatedIssues.completionDate = updatedIssues.completionDate ? new Date(updatedIssues.completionDate) : updatedIssues.completionDate;
-                var newIssues = _this4.state.issues.concat(updatedIssues);
-                _this4.setState({ issues: newIssues });
+                if (response.ok) {
+                    response.json().then(function (updatedIssues) {
+                        updatedIssues.created = new Date(updatedIssues.created);
+                        updatedIssues.completionDate = updatedIssues.completionDate ? new Date(updatedIssues.completionDate) : updatedIssues.completionDate;
+                        var newIssues = _this4.state.issues.concat(updatedIssues);
+                        _this4.setState({ issues: newIssues });
+                    });
+                } else {
+                    response.json().then(function (error) {
+                        return alert("Failed to add issue " + error.message);
+                    });
+                }
             }).catch(function (err) {
                 alert("Error in sending the data to the server: " + err.message);
             });
