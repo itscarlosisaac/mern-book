@@ -96,10 +96,20 @@ class IssueList extends React.Component {
     }
 
     createIssue(newIssue){
-        const newIssues = this.state.issues.slice();
-        newIssue.id = this.state.issues.length + 1;
-        newIssues.push(newIssue);
-        this.setState({issues: newIssues });
+        fetch('/api/issues', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(newIssue) })
+            .then( response => response.json() )
+            .then( updatedIssues => {
+                updatedIssues.created = new Date(updatedIssues.created);
+                updatedIssues.completionDate = updatedIssues.completionDate ? new Date(updatedIssues.completionDate) : updatedIssues.completionDate;
+                const newIssues = this.state.issues.concat(updatedIssues);
+                this.setState({ issues: newIssues });
+            })
+            .catch( err => {
+                alert("Error in sending the data to the server: " + err.message )
+            });
     }
 
     componentDidMount () {
@@ -113,7 +123,7 @@ class IssueList extends React.Component {
                 console.log('Total count of records:', data._metadata.total_count);
                 data.records.forEach(issue => {
                     issue.created = new Date(issue.created);
-                    issue.completionDate ? issue.completionDate = new Date(issue.completionDate) : issue.completionDate;
+                    issue.completionDate = issue.completionDate ? new Date(issue.completionDate) : issue.completionDate;
                 });
                 this.setState({issues: data.records})
             })

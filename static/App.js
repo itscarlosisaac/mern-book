@@ -211,10 +211,21 @@ var IssueList = function (_React$Component3) {
     _createClass(IssueList, [{
         key: 'createIssue',
         value: function createIssue(newIssue) {
-            var newIssues = this.state.issues.slice();
-            newIssue.id = this.state.issues.length + 1;
-            newIssues.push(newIssue);
-            this.setState({ issues: newIssues });
+            var _this4 = this;
+
+            fetch('/api/issues', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newIssue) }).then(function (response) {
+                return response.json();
+            }).then(function (updatedIssues) {
+                updatedIssues.created = new Date(updatedIssues.created);
+                updatedIssues.completionDate = updatedIssues.completionDate ? new Date(updatedIssues.completionDate) : updatedIssues.completionDate;
+                var newIssues = _this4.state.issues.concat(updatedIssues);
+                _this4.setState({ issues: newIssues });
+            }).catch(function (err) {
+                alert("Error in sending the data to the server: " + err.message);
+            });
         }
     }, {
         key: 'componentDidMount',
@@ -224,7 +235,7 @@ var IssueList = function (_React$Component3) {
     }, {
         key: 'loadData',
         value: function loadData() {
-            var _this4 = this;
+            var _this5 = this;
 
             fetch('/api/issues').then(function (response) {
                 return response.json();
@@ -232,9 +243,9 @@ var IssueList = function (_React$Component3) {
                 console.log('Total count of records:', data._metadata.total_count);
                 data.records.forEach(function (issue) {
                     issue.created = new Date(issue.created);
-                    issue.completionDate ? issue.completionDate = new Date(issue.completionDate) : issue.completionDate;
+                    issue.completionDate = issue.completionDate ? new Date(issue.completionDate) : issue.completionDate;
                 });
-                _this4.setState({ issues: data.records });
+                _this5.setState({ issues: data.records });
             }).catch(function (err) {
                 return console.log(err);
             });
