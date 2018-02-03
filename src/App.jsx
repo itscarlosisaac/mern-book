@@ -33,8 +33,8 @@ IssueRow.defaultProps = {
     // issue_title: ' -- untitled -- '
 }
 
-function IssueTable () {
-    const issueRows =  this.props.issues.map(issue => <IssueRow issue_id={issue.id} key={issue.id} issue={issue} />);
+function IssueTable (props) {
+    const issueRows =  props.issues.map(issue => <IssueRow issue_id={issue.id} key={issue.id} issue={issue} />);
     return(
         <table className="bordered-table">
             <thead>
@@ -48,7 +48,7 @@ function IssueTable () {
                     <th>Title</th>
                 </tr>
             </thead>
-            <tbody> { issueRows } </tbody>
+            <tbody>{issueRows}</tbody>
         </table>
     )
 }
@@ -107,9 +107,17 @@ class IssueList extends React.Component {
     }
     
     loadData(){
-        setTimeout( () => {
-            this.setState({issues: issues });
-        }, 500 )
+        fetch('/api/issues')
+            .then(response => response.json() )
+            .then(data => {
+                console.log('Total count of records:', data._metadata.total_count);
+                data.records.forEach(issue => {
+                    issue.created = new Date(issue.created);
+                    issue.completionDate ? issue.completionDate = new Date(issue.completionDate) : issue.completionDate;
+                });
+                this.setState({issues: data.records})
+            })
+            .catch(err => console.log(err) )
     }
 
     render(){

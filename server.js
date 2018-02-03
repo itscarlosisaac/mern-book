@@ -3,9 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 
 
-
-
-
 app.use(express.static('static'));
 app.use(bodyParser.json())
 
