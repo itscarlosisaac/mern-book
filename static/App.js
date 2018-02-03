@@ -10,14 +10,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var contentNode = document.getElementById('contents');
 
-var issues = [{
-    id: 1, status: 'Open', owner: 'Ryan', created: new Date('2018-01-23'), effort: 7, completionDate: undefined, title: 'Error in the console when clicking Add.'
-}, {
-    id: 2, status: 'Assigned', owner: 'Ravan', created: new Date('2018-01-27'), effort: 13, completionDate: new Date('2018-02-15'), title: 'Missing bottom border on panel.'
-}, {
-    id: 3, status: 'In Progress', owner: 'Michael', created: new Date('2018-01-29'), effort: 5, completionDate: new Date('2018-02-01'), title: 'Build table.'
-}];
-
 var IssueFilter = function (_React$Component) {
     _inherits(IssueFilter, _React$Component);
 
