@@ -1,0 +1,44 @@
+
+Documents are like databases.
+A document is a data structure composed of fields and values.
+Collections are like tables
+Mongo creates the _id field for each record.
+ObjectId for primary key.
+
+Use <databasename>
+db.employees.insert({name:{first:'John', last:'Doe'}, age: 44} );
+db.employees.insert({name:{first:'John', middle: 'H', last:'Doe'}, age: 22} );
+db.employees.find();
+db.employees.find().pretty();
+
+// Insert methods
+- insert()
+- insertOne()
+- insertMany()
+
+// Find methods
+- find()
+- find({age: 22 })
+
+// Operators
+- $eq
+- $gt
+
+// The Projection - This is an specific find to get the data with first name as John and age greater than 44 and just print first name and age.
+
+db.employees.find({'name.first': 'John', age: {$gte: 44}}, {'name.first': 1, age: 1});
+
+// Update a record
+ - Find the record
+ - Set the record to be updated.
+
+db.employees.update({_id: ObjectId("5a7885d5a34050d574199347")}, { $set: {age: 45 } });
+ - updateMany()
+ - updateOne()
+
+// To Delete
+db.employees.remove({_id: ObjectId("5a7885d5a34050d574199347") });
+
+// Create index to make filtering easier
+
+db.employees.createIndex({age: 1})
