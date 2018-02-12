@@ -14,7 +14,7 @@ class IssueFilter extends React.Component {
 
 const IssueRow = (props) => (
     <tr>
-        <td>{props.issue.id}</td>
+        <td>{props.issue._id}</td>
         <td>{props.issue.status}</td>
         <td>{props.issue.owner}</td>
         <td>{props.issue.created.toDateString()}</td>
@@ -34,7 +34,7 @@ IssueRow.defaultProps = {
 }
 
 function IssueTable (props) {
-    const issueRows =  props.issues.map(issue => <IssueRow issue_id={issue.id} key={issue.id} issue={issue} />);
+    const issueRows =  props.issues.map(issue => <IssueRow issue_id={issue.id} key={issue._id} issue={issue} />);
     return(
         <table className="bordered-table">
             <thead>

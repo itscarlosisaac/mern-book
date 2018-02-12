@@ -10,8 +10,11 @@
     "watch": "babel src --presets react,es2015 --out-dir static --watch"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "body-parser": "^1.18.2",
+    "co": "^4.6.0",
     "express": "^4.16.2",
+    "mongodb": "^2.2.33",
     "nodemon": "^1.14.12"
   },
   "devDependencies": {

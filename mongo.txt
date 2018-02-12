@@ -40,5 +40,5 @@ db.employees.update({_id: ObjectId("5a7885d5a34050d574199347")}, { $set: {age: 4
 db.employees.remove({_id: ObjectId("5a7885d5a34050d574199347") });
 
 // Create index to make filtering easier
-
+db + collection name + method eg: find
 db.employees.createIndex({age: 1})
