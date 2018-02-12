@@ -71,11 +71,10 @@ function validateIssue(issue){
 }
 
 app.get('/api/issues', (req, res) => {
-    console.log(db)
     db.collection('issues').find().toArray()
       .then(issues => {
           const metadata = { total_count: issues.length };
-          res.json({_metadata: metadata, records: issueFieldType })
+          res.json({_metadata: metadata, records: issues })
       })
       .catch(error => {
           console.log('ERROR: ', error )

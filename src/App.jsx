@@ -25,7 +25,7 @@ const IssueRow = (props) => (
 );
 
 IssueRow.propTypes = {
-    issue_id: React.PropTypes.number.isRequired,
+    issue_id: React.PropTypes.string.isRequired,
     issue_title: React.PropTypes.string
 }
 
@@ -34,7 +34,7 @@ IssueRow.defaultProps = {
 }
 
 function IssueTable (props) {
-    const issueRows =  props.issues.map(issue => <IssueRow issue_id={issue.id} key={issue._id} issue={issue} />);
+    const issueRows =  props.issues.map(issue => <IssueRow issue_id={issue._id} key={issue._id} issue={issue} />);
     return(
         <table className="bordered-table">
             <thead>
@@ -125,14 +125,18 @@ class IssueList extends React.Component {
     
     loadData(){
         fetch('/api/issues')
-            .then(response => response.json() )
-            .then(data => {
-                console.log('Total count of records:', data._metadata.total_count);
-                data.records.forEach(issue => {
-                    issue.created = new Date(issue.created);
-                    issue.completionDate = issue.completionDate ? new Date(issue.completionDate) : issue.completionDate;
-                });
-                this.setState({issues: data.records})
+            .then(response => {
+                if(response.ok){
+                    response.json()
+                        .then(data => {
+                            console.log('Total count of records:', data._metadata.total_count);
+                            data.records.forEach(issue => {
+                            issue.created = new Date(issue.created);
+                            issue.completionDate = issue.completionDate ? new Date(issue.completionDate) : issue.completionDate;
+                        });
+                        this.setState({issues: data.records})
+                    })
+                }
             })
             .catch(err => console.log(err) )
     }
