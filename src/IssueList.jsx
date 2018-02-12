@@ -1,4 +1,7 @@
 // Importing components
+import React from 'react';
+import PropTypes from 'prop-types';
+import 'whatwg-fetch';
 import IssueAdd from './IssueAdd.jsx'
 import IssueFilter from './IssueFilter.jsx'
 
@@ -15,8 +18,8 @@ const IssueRow = (props) => (
 );
 
 IssueRow.propTypes = {
-    issue_id: React.PropTypes.string.isRequired,
-    issue_title: React.PropTypes.string
+    issue_id: PropTypes.string.isRequired,
+    issue_title: PropTypes.string
 }
 
 IssueRow.defaultProps = {
