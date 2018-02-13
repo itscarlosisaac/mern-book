@@ -24,7 +24,7 @@ export default class IssueAdd extends React.Component{
                 <form name="issueAdd" onSubmit={this.handleSubmit}>
                     <input type="text" name="owner" placeholder="Onwer"/>
                     <input type="text" name="title" placeholder="Title"/>
-                    <button>Add</button>
+                    <button>Add More</button>
                 </form>
             </div>
         )

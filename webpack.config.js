@@ -5,7 +5,7 @@ const webpack = require('webpack')
 
 module.exports = {
     entry: {
-        app: './src/App.jsx',
+        app: ['./src/App.jsx'],
         vendor: ['react', 'react-dom', 'whatwg-fetch'],
     },
     output: {
@@ -37,5 +37,6 @@ module.exports = {
                 target: 'http://localhost:3000'
             }
         }
-    }
+    },
+    devtool: 'source-map'
 }
