@@ -2,28 +2,28 @@
 // const MongoClient = require('mongodb').MongoClient;
 // const bodyParser = require('body-parser');
 // const Issue = require('./issue.js');
-
-import express from 'express';
-import bodyParser from 'body-parser'
-import Issue from './issue'
-import {MongoClient} from 'mongodb';
+import { MongoClient } from 'mongodb';
 import 'babel-polyfill';
 import SourceMapSupport from 'source-map-support';
-SourceMapSupport.install();
+import express from 'express';
+import bodyParser from 'body-parser';
+import Issue from './issue';
 
+
+SourceMapSupport.install();
 const app = express();
 // Mongo db
 let db;
 MongoClient.connect('mongodb://localhost/issuetracker')
-           .then(connection => {
-               db = connection;
-               app.listen(3000, () => {
-                   console.log('App started on port 3000');
-               })
-           })
-           .catch(error => {
-               console.log('Connection error: ', error );
-           })
+    .then((connection) => {
+        db = connection;
+        app.listen(3000, () => {
+            console.log('App started on port 3000');
+        })
+    })
+    .catch(error => {
+        console.log('Connection error: ', error );
+    })
 
 
 // Static and body parser
@@ -67,7 +67,7 @@ app.post('/api/issues', (req, res) => {
         return;
     }
 
-    db.collection('issues').insertOne(newIssue)
+    db.collection('issues').insertOne(Issue.cleanUpIssue(newIssue))
       .then(result => db.collection('issues').find({_id: result.insertedId }).limit(1).next() )
       .then(newIssues =>  res.json(newIssues))
       .catch( err => {
