@@ -1,13 +1,19 @@
-const express = require("express");
+// const express = require("express");
+// const MongoClient = require('mongodb').MongoClient;
+// const bodyParser = require('body-parser');
+// const Issue = require('./issue.js');
+
+import express from 'express';
+import bodyParser from 'body-parser'
+import Issue from './issue'
+import {MongoClient} from 'mongodb';
+import 'babel-polyfill';
+import SourceMapSupport from 'source-map-support';
+SourceMapSupport.install();
+
 const app = express();
-const bodyParser = require('body-parser');
-
-const Issue = require('./issue.js');
-
 // Mongo db
-const MongoClient = require('mongodb').MongoClient;
 let db;
-
 MongoClient.connect('mongodb://localhost/issuetracker')
            .then(connection => {
                db = connection;
