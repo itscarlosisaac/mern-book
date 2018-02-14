@@ -12,7 +12,8 @@
     "watch-server": "babel server --presets es2015-node4 --out-dir dist --source-maps --watch",
     "dev-all": "yarn run watch & yarn run watch-server & yarn start",
     "dev-all-hook": "yarn run watch & yarn start-hook",
-    "watch": "webpack-dev-server --hot --inline"
+    "watch": "webpack-dev-server --hot --inline",
+    "lint": "esllint --ext js,jsx src server webpack.config.js"
   },
   "dependencies": {
     "async": "^2.6.0",
@@ -29,6 +30,7 @@
     "express": "^4.16.2",
     "mongodb": "^2.2.33",
     "nodemon": "^1.14.12",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "source-map-support": "^0.5.3",

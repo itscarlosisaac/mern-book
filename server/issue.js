@@ -21,7 +21,9 @@ const issueFieldType = {
 function cleanUpIssue(issue) {
   const cleanedUpIssue = {};
   Object.keys(issue).forEach((field) => {
-    issueFieldType[field] = cleanedUpIssue[field] ? issue[field] : null;
+    if (issueFieldType[field]) {
+      cleanedUpIssue[field] = issue[field];
+    }
   });
   return cleanedUpIssue;
 }
