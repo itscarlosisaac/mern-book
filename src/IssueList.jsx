@@ -55,6 +55,15 @@ export default class IssueList extends React.Component {
     this.loadData();
   }
 
+  componentDidUpdate(prevProps) {
+    const oldQuery = prevProps.location.query;
+    const newQuery = this.props.location.query;
+    if (oldQuery !== undefined && oldQuery.status === newQuery.status) {
+      return;
+    }
+    this.loadData();
+  }
+
   createIssue(newIssue) {
     fetch('/api/issues', {
       method: 'POST',
@@ -83,12 +92,12 @@ export default class IssueList extends React.Component {
   }
 
   loadData() {
-    fetch('/api/issues')
+    fetch(`/api/issues${this.props.location.search}`)
       .then((response) => {
         if (response.ok) {
           response.json()
             .then((data) => {
-              console.log('Total count of records:', data._metadata.total_count);
+              // console.log('Total count of records:', data._metadata.total_count);
               data.records.forEach((issue) => {
                 issue.created = new Date(issue.created);
                 issue.completionDate = issue.completionDate ?
