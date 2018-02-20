@@ -1,8 +1,10 @@
 {
     "extends": "airbnb",
     "rules":{
-        "no-underscore-dangle":["error", {"allow": ["_id"] }],
-        "no-param-reassign": ["error", { "props": false }]
+        "no-console": "off",
+        "no-underscore-dangle":["error", {"allow": ["_id", "_metadata"] }],
+        "no-param-reassign": ["error", { "props": false }],
+        "max-len": "off"
     },
     "env": {
         "browser": true

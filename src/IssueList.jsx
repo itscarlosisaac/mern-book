@@ -1,4 +1,5 @@
 // Importing components
+import { Link } from 'react-router-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
@@ -7,7 +8,7 @@ import IssueFilter from './IssueFilter.jsx'
 
 const IssueRow = props => (
   <tr>
-    <td>{props.issue._id}</td>
+    <td><Link to={`/issues/${props.issue._id}`}>{props.issue._id.substr(-4)}</Link></td>
     <td>{props.issue.status}</td>
     <td>{props.issue.owner}</td>
     <td>{props.issue.created.toDateString()}</td>
@@ -39,7 +40,7 @@ function IssueTable(props) {
       </thead>
       <tbody>{issueRows}</tbody>
     </table>
-  )
+  );
 }
 export default class IssueList extends React.Component {
   constructor() {
@@ -69,7 +70,6 @@ export default class IssueList extends React.Component {
                 new Date(updatedIssues.completionDate) :
                 updatedIssues.completionDate;
               const newIssues = this.state.issues.concat(updatedIssues);
-              console.log(newIssues);
               this.setState({ issues: newIssues });
             });
         } else {
@@ -99,7 +99,7 @@ export default class IssueList extends React.Component {
             });
         }
       })
-      .catch((err) => { console.log(err); });
+      .catch((err) => { console.error(err); });
   }
 
   render() {
