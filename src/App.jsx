@@ -6,38 +6,38 @@ import IssueList from './IssueList.jsx';
 import IssueEdit from './IssueEdit.jsx';
 
 const contentNode = document.getElementById('contents');
-const NoMatch = () => <p>No page found</p>;
+const NoMatch = () => <p>No page found here.</p>;
 const IssueWithRouter = withRouter(IssueList);
 
 const App = props => (
   <div>
-    <div className="header">
+    <header className="header">
       <h1>Issue Tracker</h1>
-    </div>
+    </header>
     <div className="contents">
       {props.children}
     </div>
-    <div className="footer">
+    <footer className="footer">
       Full source code available at this link.
-    </div>
+    </footer>
   </div>
 );
 
 App.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.array.isRequired,
 };
 
 const RoutedApp = () => (
-  <HashRouter>
+  <Router>
     <Switch>
       <Redirect from="/" exact to="/issues" />
       <App>
         <Route path="/issues" exact component={IssueWithRouter} />
         <Route path="/issues/:id" component={IssueEdit} />
-        <Route path="*" component={NoMatch} />
+        <Route path="/404" component={NoMatch} />
       </App>
     </Switch>
-  </HashRouter>
+  </Router>
 );
 
 ReactDOM.render(<RoutedApp />, contentNode);

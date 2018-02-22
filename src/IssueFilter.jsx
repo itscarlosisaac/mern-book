@@ -27,12 +27,6 @@ export default class IssueFilter extends React.Component { // eslint-disable-lin
         <Link to={'/issues'}> All Issues</Link>
         <Link to={'/issues?status=Open'}> Open Issues</Link>
         <Link to={'/issues?status=Assigned'}> Assigned Issues</Link>
-        {/* <button onClick={this.clearFilter}> All Issues</button>
-        <Separator />
-        <Link to={{ pathname: '/issues', query: {status: 'Open' } } }> Open Issues </Link> 
-        <button onClick={this.setFilterOpen} >Open Issues</button>
-        <Separator />
-        <button onClick={this.setFilterAssigned} >Assigned Issues</button> */}
       </div>
     );
   }

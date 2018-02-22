@@ -4,7 +4,7 @@ import SourceMapSupport from 'source-map-support';
 import express from 'express';
 import bodyParser from 'body-parser';
 import Issue from './issue';
-
+import path from 'path';
 
 SourceMapSupport.install();
 const app = express();
@@ -69,4 +69,9 @@ app.post('/api/issues', (req, res) => {
       res.status(500).json({message: `Internal server Error: ${error}` });
     });
   res.json(newIssue);
+});
+
+// Static Route
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('static/index.html'));
 });
